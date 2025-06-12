@@ -1,0 +1,33 @@
+using System;
+
+namespace TestTime
+{
+    public struct Time
+    {
+        private readonly int minutes;
+
+        public Time(int hh, int mm)
+        {
+            this.minutes = 60 * hh + mm;
+        }
+
+        public override string ToString()
+        {
+            return minutes.ToString();
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Time morning = new Time(8, 30);
+            Time early = new Time(4, 30);     
+            Time midnight = new Time(0, 0);   
+
+            Console.WriteLine("Morning Time: " + morning);
+            Console.WriteLine("Early Time: " + early);
+            Console.WriteLine("Midnight Time: " + midnight);
+        }
+    }
+}
