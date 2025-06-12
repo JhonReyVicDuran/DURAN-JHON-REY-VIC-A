@@ -5,6 +5,7 @@ namespace TestTime
     public struct Time
     {
         private readonly int minutes;
+
         public Time(int hh, int mm)
         {
             this.minutes = 60 * hh + mm;
@@ -15,15 +16,8 @@ namespace TestTime
             this.minutes = totalMinutes;
         }
 
-        public int Hour
-        {
-            get { return minutes / 60; }
-        }
-
-        public int Minute
-        {
-            get { return minutes % 60; }
-        }
+        public int Hour => minutes / 60;
+        public int Minute => minutes % 60;
 
         public override string ToString()
         {
@@ -39,23 +33,28 @@ namespace TestTime
         {
             return new Time(t1.minutes - t2.minutes);
         }
+
+        public static implicit operator Time(int totalMinutes)
+        {
+            return new Time(totalMinutes);
+        }
+
+        public static explicit operator int(Time t)
+        {
+            return t.minutes;
+        }
     }
+
 
     class Program
     {
         static void Main(string[] args)
         {
-            Time t1 = new Time(1, 30);  
-            Time t2 = new Time(2, 45);  
+            Time t1 = new Time(1, 30);
+            int total = (int)t1;
 
-            Time added = t1 + t2;       
-            Time subtracted = t2 - t1;  
-
-            Console.WriteLine("Time 1: " + t1);
-            Console.WriteLine("Time 2: " + t2);
-            Console.WriteLine("Time 1 and 2 added together is: " + added);
-            Console.WriteLine("Time 2 minus Time 1 is: " + subtracted);
-
+            Console.WriteLine("Time : " + t1);         
+            Console.WriteLine("Minutes since midnight: " + total);
         }
     }
 }
